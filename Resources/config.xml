@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+
+        <element type="button">
+            <name>defaultButton</name>
+            <label><![CDATA[<b>Allgemeine Einstellungen</b>]]></label>
+        </element>
+
+
+        <element type="text">
+            <name>csvOrdersFilename</name>
+            <label>Dateiname Aufträge</label>
+            <value>infoauftrag.csv</value>
+            <description><![CDATA[Der Name der .csv Datei.<br /><br /><b>Format:</b><br />Bestellnummer|Status<br /><br /><b>Beispiel:</b><br />state.csv]]></description>
+        </element>
+
+        <element type="text">
+            <name>csvPositionsFilename</name>
+            <label>Dateiname Positionen</label>
+            <value>infoposition.csv</value>
+            <description><![CDATA[Der Name der .csv Datei.<br /><br /><b>Format:</b><br />Bestellnummer|Status<br /><br /><b>Beispiel:</b><br />state.csv]]></description>
+        </element>
+
+        <element type="text">
+            <name>csvDirectory</name>
+            <label>Verzeichnis</label>
+            <value>sync/import/lieferauskunft</value>
+            <description><![CDATA[Das Verzeichniss der .csv Datei.<br /><br /><b>Beispiel:</b><br />/var/www/sync/import<br />sync/import]]></description>
+        </element>
+
+
+
+    </elements>
+</config>

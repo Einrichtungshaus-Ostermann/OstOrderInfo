@@ -1,0 +1,251 @@
+/**
+ * Einrichtungshaus Ostermann GmbH & Co. KG - Order Info
+ *
+ * @package   OstOrderInfo
+ *
+ * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>
+ * @copyright 2019 Einrichtungshaus Ostermann GmbH & Co. KG
+ * @license   proprietary
+ */
+
+// ...
+body.is--ctl-ostorderinfo.is--act-index {
+
+
+
+    div.content.ost-order-info--login {
+
+
+        .ost-order-info--alert {
+            margin-bottom: 15px;
+        }
+
+
+        form {
+            .ost-order-info--login--order-number,
+            .ost-order-info--login--customer-number {
+                margin-bottom: 15px;
+                display: block;
+            }
+
+            .btn {
+                display: block;
+            }
+        }
+
+    }
+
+
+
+
+
+
+
+
+    div.content.ost-order-info--index {
+
+
+
+        .header--container {
+            margin-bottom: 20px;
+
+            h1 {
+                padding: 20px 0px 20px 0px;
+                margin: 0;
+                font-size: 26px;
+            }
+        }
+
+
+
+
+        .status--container {
+
+            img.status-image {
+                margin: auto;
+            }
+
+
+
+            .alert {
+                margin: 15px 0 15px 0;
+            }
+
+
+        }
+
+
+        .customer--billing-address {
+            width: 49%;
+            float: left;
+            margin: 0px 0px 20px 0px;
+
+            .panel--body {
+                height: 200px;
+
+                p {
+                    margin: 0;
+                }
+            }
+        }
+
+
+
+
+        .customer--shipping-address {
+            width: 49%;
+            float: right;
+            margin: 0px 0px 20px 0px;
+
+            .panel--body {
+                height: 200px;
+
+                p {
+                    margin: 0;
+                }
+
+            }
+        }
+
+
+
+        .base-info--container {
+
+            clear: both;
+            margin: 0px 0px 20px 0px;
+
+            div.panel--body {
+
+                p{
+                    margin: 0;
+                }
+
+            }
+
+        }
+
+
+
+
+
+        .positions--container {
+
+
+
+            margin: 0px 0px 20px 0px;
+
+
+            .positions--table {
+                .column--number {
+                    width: 20%;
+                    text-align: left;
+                }
+                .column--name {
+                    width: 50%;
+                    text-align: left;
+                }
+                .column--quantity {
+                    width: 10%;
+                    text-align: center;
+                }
+                .column--price {
+                    width: 20%;
+                    text-align: right;
+                }
+            }
+
+
+
+            .sums--table {
+                .sums--table-item {
+                    border-width: 0;
+
+                    .panel--td {
+                        padding: 0;
+                    }
+                }
+
+                .sums--table-item:first-child {
+                    border-width: 1px 0 0 0;
+                    padding-top: 10px;
+                }
+
+                .column--description {
+                    width: 20%;
+                    text-align: left;
+                    margin-left: 60%;
+                }
+                .column--amount {
+                    width: 20%;
+                    text-align: right;
+                }
+            }
+
+
+        }
+
+
+
+
+
+
+        .customer-service--container {
+
+            margin: 0;
+
+            div.panel--body {
+
+                p{
+                    margin: 0;
+                }
+
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+// account sidebar hack
+@media screen and (min-width: @tabletViewportWidth) {
+    .is--ctl-ostorderinfo {
+        .sidebar-main {
+            display: block;
+        }
+    }
+    .sidebar-main {
+        .is--ctl-ostorderinfo & {
+            .categories--headline,
+            .categories--navigation {
+                display: none;
+            }
+        }
+        .is--ctl-ostorderinfo & {
+            & + .content--wrapper {
+                .unitize(margin-left, 260);
+            }
+        }
+    }
+
+
+}

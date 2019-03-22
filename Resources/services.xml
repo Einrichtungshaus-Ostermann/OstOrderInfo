@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <!-- configuration -->
+        <service id="ost_order_info.configuration" class="OstFoundation\Services\ConfigurationService">
+            <factory service="ost_foundation.services.configuration_service" method="getConfig"/>
+            <argument type="string">OstOrderInfo</argument>
+        </service>
+
+        <!-- console commands -->
+        <service id="ost_order_info.commands.send_vouchers_command" class="OstOrderInfo\Commands\SyncOrders">
+            <argument type="service" id="db"/>
+            <argument type="service" id="models"/>
+            <argument type="service" id="ost_order_info.configuration"/>
+            <tag name="console.command" command="ost-order-info:sync-orders"/>
+        </service>
+
+
+    </services>
+</container>
