@@ -16,3 +16,12 @@ INSERT INTO `ost_orderinfo_status` (`id`, `key`, `name`, `rangeStart`, `rangeEnd
 (15, NULL, 'Bedanken', 590, 630, 'Wir möchten uns nochmals für die Bestellung bedanken und freuen uns auf Ihren nächsten Besuch.', NULL, '|1|'),
 (16, 4, 'Versendet', 600, 800, 'Ihre Bestellung wurde mit DHL versendet und die Lieferzeit beträgt ca. 1-3 Werktage. Von DHL erhalten Sie eine E-Mail mit der Sie die Sendung nachverfolgen können. Wir hoffen, dass Sie mit den gekauften Artikeln zufrieden sind und würden uns über ein Wiedersehen in unserem Onlineshop oder unserem Einrichtungs-Centrum freuen.', NULL, '|4|14|'),
 (17, 4, 'Versendet', 600, 800, 'Ihre Bestellung wurde an Hermes übergeben.\r\n\r\n1. Wir liefern Ihre Möbel durch ein qualifiziertes 2-Mann-Team bis zum Verwendungsort in Ihre Wohnung oder Ihrem Haus.\r\n2. Das bedeutet, Sie müssen nicht mit anfassen. Die Entsorgung des Verpackungsmaterial, sowie Kleinstmontagen sind kostenlos.\r\n3. Sobald die Ware im ausliefernden Depot angekommen ist, stimmt die Firma Hermes telefonisch mit Ihnen einen halbtagsgenauen Liefertermin ab.\r\n4. Sie erhalten von Hermes eine E-Mail mit der Sie die Sendung nachverfolgen können.\r\n\r\nWir hoffen, dass Sie mit den gekauften Artikeln zufrieden sind und würden uns über ein Wiedersehen in unserem Onlineshop oder unserem Einrichtungs-Centrum freuen.', NULL, '|5|');
+
+INSERT INTO `ost_orderinfo_dispatches` (`id`, `key`, `name`) VALUES
+(1, NULL, 'Eigenauslieferung'),
+(2, NULL, 'Selbstabholung'),
+(3, NULL, ''),
+(4, NULL, 'DHL Paket'),
+(5, NULL, 'Hermes'),
+(12, NULL, ''),
+(14, NULL, 'DHL Express');
