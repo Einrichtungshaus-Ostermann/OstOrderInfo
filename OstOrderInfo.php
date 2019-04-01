@@ -9,6 +9,10 @@
  * 1.0.0
  * - initial release
  *
+ * 1.0.1
+ * - removed obsolete css classes
+ * - changed status images
+ *
  * @package   OstOrderInfo
  *
  * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>

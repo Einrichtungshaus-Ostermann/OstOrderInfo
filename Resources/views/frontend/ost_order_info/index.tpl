@@ -30,7 +30,7 @@
     {if $ostOrderInfo.isLoggedIn == false}
 
         {* login *}
-        <div class="content account--content ost-order-info ost-order-info--login">
+        <div class="content ost-order-info ost-order-info--login">
 
             {if $ostOrderInfo.error == 1}
                 {$alertMessage = "Zu der eingegebenen Kombination aus Bestell- und Kundennummer wurde kein Auftrag gefunden."}
@@ -75,7 +75,7 @@
         {assign var="order" value=$ostOrderInfo.order}
 
         {* order info *}
-        <div class="content account--content ost-order-info ost-order-info--index">
+        <div class="content ost-order-info ost-order-info--index">
 
             <div class="header--container panel">
                 <h1 class="panel--title">{s name='header'}Auftragsauskunft{/s}</h1>
@@ -83,7 +83,7 @@
 
             <div class="status--container">
                 {if $order.status.key > 0}
-                    {assign var="file" value="frontend/_public/src/img/status-banner/status-0{$order.status.key}.png"}
+                    {assign var="file" value="frontend/_public/src/img/status-banner/status-0{$order.status.key}.jpg"}
                     <img class="status-image" src="{link file=$file}" />
                 {/if}
 
@@ -148,7 +148,7 @@
                 </div>
             </div>
 
-            <div class="base-info--container account--newsletter account--box panel has--border is--rounded newsletter">
+            <div class="base-info--container panel has--border is--rounded">
                 <h2 class="panel--title is--underline">Weitere Informationen</h2>
                 <div class="panel--body is--wide">
                     <p>
@@ -171,7 +171,7 @@
                 </div>
             </div>
 
-            <div class="positions--container panel has--border is--rounded newsletter">
+            <div class="positions--container panel has--border is--rounded">
                 <div class="panel--body is--wide">
                     <div class="panel--table positions--table">
                         <div class="positions--table-header panel--tr">
@@ -242,7 +242,7 @@
                 </div>
             </div>
 
-            <div class="customer-service--container panel has--border is--rounded newsletter">
+            <div class="customer-service--container panel has--border is--rounded">
                 <h2 class="panel--title is--underline">Unser Kundenservice</h2>
                 <div class="panel--body is--wide">
                     <p>
