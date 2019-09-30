@@ -99,6 +99,10 @@ class SyncOrders extends ShopwareCommand
         $positions = array_map('utf8_encode', $positions);
         array_shift($positions);
 
+        // output
+        $output->writeln('orders found: ' . count($orders));
+        $output->writeln('positions found: ' . count($positions));
+
         // ...
         $this->processOrders($orders, $output);
         $this->processPositions($positions, $output);
@@ -128,6 +132,22 @@ class SyncOrders extends ShopwareCommand
             'unchanged'     => 0,
             'invalid-lines' => 0
         ];
+
+        // get every order
+        $query = '
+            SELECT number, id, status, md5
+            FROM ost_orderinfo_orders
+        ';
+        $arr = Shopware()->Db()->fetchAll($query);
+
+        // all db orders
+        $dbOrders = array();
+
+        // ...
+        foreach ($arr as $aktu) {
+            // set db order with number
+            $dbOrders[$aktu['number']] = array('id' => $aktu['id'], 'status' => $aktu['status'], 'md5' => $aktu['md5']);
+        }
 
         // ...
         foreach ($orders as $line) {
@@ -160,16 +180,8 @@ class SyncOrders extends ShopwareCommand
             // get the md5
             $md5 = $this->getMd5($order);
 
-            // get the order
-            $query = '
-                SELECT id, status, md5
-                FROM ost_orderinfo_orders
-                WHERE number = :number
-            ';
-            $dbRow = $this->db->fetchRow($query, ['number' => $order['number']]);
-
-            // not even found?
-            if (!is_array($dbRow)) {
+            // not found?
+            if (!isset($dbOrders[$order['number']])) {
                 // count it
                 ++$counter['added'];
 
@@ -193,7 +205,10 @@ class SyncOrders extends ShopwareCommand
             }
 
             // wrong md5?!
-            if ($md5 !== $dbRow['md5']) {
+            if ($md5 !== $dbOrders[$order['number']]['md5']) {
+                // get the db row
+                $dbRow = $dbOrders[$order['number']];
+
                 // count it
                 ++$counter['updated'];
 
@@ -258,6 +273,22 @@ class SyncOrders extends ShopwareCommand
             'invalid-lines' => 0
         ];
 
+        // get the positions
+        $query = '
+            SELECT id, md5, orderNumber, position, number
+            FROM ost_orderinfo_orders_positions
+        ';
+        $arr = $this->db->fetchAll($query);
+
+        // every position
+        $dbPositions = array();
+
+        // loop the db
+        foreach ($arr as $aktu) {
+            // set db order with number
+            $dbPositions[$aktu['number'] . '-' . $aktu['position'] . '-' . $aktu['orderNumber']] = array('id' => $aktu['id'], 'md5' => $aktu['md5']);
+        }
+
         // ...
         foreach ($positions as $line) {
             // advance progress bar
@@ -289,16 +320,11 @@ class SyncOrders extends ShopwareCommand
             // get the md5
             $md5 = $this->getMd5($position);
 
-            // get the order
-            $query = '
-                SELECT id, md5
-                FROM ost_orderinfo_orders_positions
-                WHERE orderNumber = :orderNumber AND position = :position AND number = :number
-            ';
-            $dbRow = $this->db->fetchRow($query, ['orderNumber' => $position['orderNumber'], 'position' => $position['position'], 'number' => $position['number']]);
+            // the unique key to check
+            $key = $position['number'] . '-' . $position['position'] . '-' . $position['orderNumber'];
 
             // not even found?
-            if (!is_array($dbRow)) {
+            if (!isset($dbPositions[$key])) {
                 // count it
                 ++$counter['added'];
 
@@ -314,12 +340,12 @@ class SyncOrders extends ShopwareCommand
             }
 
             // wrong md5?!
-            if ($md5 !== $dbRow['md5']) {
+            if ($md5 !== $dbPositions[$key]['md5']) {
                 // count it
                 ++$counter['updated'];
 
                 // find and update it
-                $model = $this->modelManager->find(Models\Order\Position::class, (int) $dbRow['id']);
+                $model = $this->modelManager->find(Models\Order\Position::class, (int) $dbPositions[$key]['id']);
                 $model->fromArray($position);
                 $model->setMd5($md5);
                 $this->modelManager->flush($model);

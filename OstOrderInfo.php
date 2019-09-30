@@ -13,6 +13,9 @@
  * - removed obsolete css classes
  * - changed status images
  *
+ * 1.0.2
+ * - changed reading orders and positions to improve performance
+ *
  * @package   OstOrderInfo
  *
  * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>
