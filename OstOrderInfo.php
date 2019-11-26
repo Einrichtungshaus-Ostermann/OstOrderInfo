@@ -16,6 +16,9 @@
  * 1.0.2
  * - changed reading orders and positions to improve performance
  *
+ * 1.0.3
+ * - fixed memory limit
+ *
  * @package   OstOrderInfo
  *
  * @author    Eike Brandt-Warneke <e.brandt-warneke@ostermann.de>

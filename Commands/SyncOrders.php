@@ -77,6 +77,10 @@ class SyncOrders extends ShopwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        // memory limit
+        ini_set("memory_limit", "-1");
+        set_time_limit(0);
+
         // ...
         $output->writeln('reading orders .csv file: ' . rtrim($this->configuration['csvDirectory'], '/') . '/' . $this->configuration['csvOrdersFilename']);
 
@@ -192,6 +196,9 @@ class SyncOrders extends ShopwareCommand
                 $this->modelManager->persist($model);
                 $this->modelManager->flush($model);
 
+                // clear
+                unset($model);
+
                 // create history
                 $model = new Models\Order\History();
                 $model->setOrderNumber($order['number']);
@@ -199,6 +206,9 @@ class SyncOrders extends ShopwareCommand
                 $model->setStatus($order['status']);
                 $this->modelManager->persist($model);
                 $this->modelManager->flush($model);
+
+                // clear
+                unset($model);
 
                 // next one
                 continue;
@@ -218,6 +228,9 @@ class SyncOrders extends ShopwareCommand
                 $model->setMd5($md5);
                 $this->modelManager->flush($model);
 
+                // clear
+                unset($model);
+
                 // did we change the status?
                 if ((int) $dbRow['status'] !== (int) $order['status']) {
                     // create history
@@ -227,6 +240,9 @@ class SyncOrders extends ShopwareCommand
                     $model->setStatus($order['status']);
                     $this->modelManager->persist($model);
                     $this->modelManager->flush($model);
+
+                    // clear
+                    unset($model);
                 }
 
                 // and next
@@ -291,6 +307,7 @@ class SyncOrders extends ShopwareCommand
 
         // ...
         foreach ($positions as $line) {
+
             // advance progress bar
             $progressBar->advance();
 
@@ -299,6 +316,7 @@ class SyncOrders extends ShopwareCommand
 
             // get the csv from it
             $csv = str_getcsv($line, ';');
+
 
             // at least 8 columns
             if (count($csv) < 8) {
@@ -335,6 +353,9 @@ class SyncOrders extends ShopwareCommand
                 $this->modelManager->persist($model);
                 $this->modelManager->flush($model);
 
+                // clear
+                unset($model);
+
                 // next one
                 continue;
             }
@@ -349,6 +370,9 @@ class SyncOrders extends ShopwareCommand
                 $model->fromArray($position);
                 $model->setMd5($md5);
                 $this->modelManager->flush($model);
+
+                // clear
+                unset($model);
 
                 // and next
                 continue;
